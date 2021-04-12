@@ -1,0 +1,3 @@
+GET http://localhost:5000/forcast/prague
+Content-Type: application/json
+
