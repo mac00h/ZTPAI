@@ -27,6 +27,12 @@
 .navbar a:hover {
   color: #f1356d;
 }
+
+img{
+  width: 25%;
+  height: 25%;
+}
+
 .content {
   max-width: 600px;
   margin: 40px auto;
