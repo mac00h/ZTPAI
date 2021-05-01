@@ -3,9 +3,7 @@ const cors = require('cors');
 const mysql = require('mysql');
 require('dotenv').config();
 const app = express();
-const router = require('./router');
-
-const SELECT_ALL = 'select * from user_details';
+const SELECT_ALL = 'select * from user_details';    
 const PORT = 5000;
 
 var connection = mysql.createConnection({
@@ -27,11 +25,9 @@ connection.connect(err => {
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use("/forcast/", router);
 app.use(express.static('public'));
 
-
-app.get('/', (req, res) =>{
+app.get('/', (req, res) => {
     const d = new Date();
     res.json({currentTime: d.toTimeString() });
     console.log('Received GET request.');

@@ -1,10 +1,14 @@
+import weamuseLogo from '../img/weamuseLogo.svg';
+import { Link } from 'react-router-dom';
+
 const Navbar = () => {
     return (
         <nav className="navbar">
-            <h1>Weamuse</h1>
+            <img src = {weamuseLogo} alt="Logo"/>
             <div className="links">
-                <a href="/">Home</a>
-                <a href="/About">About</a>
+                <Link to="/">Home</Link>
+                <Link to="/About">About</Link>
+                <Link to="/Hru">How are you?</Link>
             </div>
         </nav>
      );

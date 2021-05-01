@@ -1,17 +1,17 @@
 import React from 'react';
+import '../css/conditions.css'
 
 const conditions = (props) => {
    return (
        <div>
            {props.responseObj.cod === 200 ?
-               <div>
-                   <p><strong>{props.responseObj.name}, {props.responseObj.sys.country}</strong></p>
-                   <p>Temp: {Math.round(props.responseObj.main.temp)}°C </p>
-                   <p>Conditions: {props.responseObj.weather[0].description}.</p>
-                   <p>Min_temp: {Math.round(props.responseObj.main.temp_min)}</p>
-                   <p>Max_temp: {Math.round(props.responseObj.main.temp_max)}</p>
+               <div className = "conditionsContainer">
+                   <div className = "location"><strong>{props.responseObj.name}, {props.responseObj.sys.country}</strong></div>
+                   <div className = "temp">{Math.round(props.responseObj.main.temp)}°C </div>
+                   <div className = "description">{props.responseObj.weather[0].description}.</div>
+                   <div className = "hilow">{Math.round(props.responseObj.main.temp_min)}°C / {Math.round(props.responseObj.main.temp_max)}°C</div>
                </div>
-           : null
+            : null
            }
        </div>
    )

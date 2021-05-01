@@ -1,36 +1,36 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Conditions from './Conditions';
+import '../css/searchWeather.css';
+import useGeoLocation from '../scripts/useGeoLocation';
+
 
 const Weatherapp = () => {
-    let [responseObj, setResponseObj] = useState({});
-    let [city, setCity] = useState('');
-    const uriEncodedCity = encodeURIComponent(city);
-    function getForecast(e){
-        e.preventDefault();
-        let url = `http://localhost:5000/forcast/${uriEncodedCity}/`
+    const weatherKey = "e810cad3c7a0abf13ac6a8e80d5de218";
+    const [responseObj, setResponseObj] = useState({});
+    const location = useGeoLocation();
+    let lt = '-44.1110';
+    let ln = '-11.3221';
+    
+    function forecast(){
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lt}&lon=${ln}&units=metric&appid=${weatherKey}`
         fetch(url)
-        .then(res=> res.json())
-            .then(res => {
-                setResponseObj(res);
-            }).catch(err =>{
-            console.log(err)
-        });
-    }
+        .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                setResponseObj(response);
+            }).catch(err => {
+                console.log(err)
+            })
+    };
 
+    if(location.loaded === true){
+        lt = location.coordinates.lat;
+        ln = location.coordinates.lng;
+    }
+    
     return (
        <div>
-           <h2>Find Current Weather Conditions</h2>
-           <form onSubmit={getForecast}>
-                <input
-                    type="text"
-                    placeholder="Enter City"
-                    maxLength="50"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-           
-           <button type="submit">Get Forecast</button>
-           </form>
+           <button onClick={forecast}>press me please</button>
            <Conditions responseObj={responseObj}/>
        </div>
     )
