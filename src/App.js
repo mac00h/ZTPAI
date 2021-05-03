@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from "./components/Navbar";
-import Weatherapp from './components/Weatherapp';
 import Home from './pages/Home';
 import About from './pages/About';
 import Hru from './pages/Hru';
+import Register from './pages/Register';
 
 function App() {
   return(
@@ -21,6 +21,9 @@ function App() {
             </Route>
             <Route path="/Hru">
               <Hru/>
+            </Route>
+            <Route path="/Register">
+              <Register/>
             </Route>
           </Switch>
         </div>
