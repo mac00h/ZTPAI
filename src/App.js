@@ -1,10 +1,11 @@
-import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Home from './pages/Home';
 import About from './pages/About';
-import Hru from './pages/Hru';
 import Register from './pages/Register';
+import HowAreYou from './components/HowAreYou';
+import UserPreferences from './components/UserPreferences';
+import Recommendations from './components/Recommendations';
 
 function App() {
   return(
@@ -19,8 +20,14 @@ function App() {
             <Route path="/About">
               <About/>
             </Route>
-            <Route path="/Hru">
-              <Hru/>
+            <Route path="/HowAreYou">
+              <HowAreYou/>
+            </Route>
+            <Route path="/UserPreferences">
+              <UserPreferences/>
+            </Route>
+            <Route path="/Recommendations">
+              <Recommendations/>
             </Route>
             <Route path="/Register">
               <Register/>

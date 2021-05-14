@@ -1,39 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import Conditions from './Conditions';
-import '../css/searchWeather.css';
-import useGeoLocation from '../scripts/useGeoLocation';
-
+import Conditions from './Conditions'
+import '../css/searchWeather.css'
+import useGeoLocation from '../scripts/useGeoLocation'
+import { useEffect, useState } from 'react'
 
 const Weatherapp = () => {
-    const weatherKey = "e810cad3c7a0abf13ac6a8e80d5de218";
-    const [responseObj, setResponseObj] = useState({});
-    const location = useGeoLocation();
-    let lt = '-44.1110';
-    let ln = '-11.3221';
-    
-    function forecast(){
-        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lt}&lon=${ln}&units=metric&appid=${weatherKey}`
-        fetch(url)
-        .then(response => response.json())
-            .then(response => {
-                console.log(response);
-                setResponseObj(response);
-            }).catch(err => {
-                console.log(err)
-            })
-    };
+    const location = useGeoLocation()
+    let lat 
+    let lon
+    let bbb = false;
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const weatherKey = process.env.REACT_APP_WEATHERMAP
 
     if(location.loaded === true){
-        lt = location.coordinates.lat;
-        ln = location.coordinates.lng;
+        lat = location.coordinates.lat
+        lon = location.coordinates.lng
+        bbb = true;
     }
     
+    useEffect(async () => {
+        console.log('useeffect ran')
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${weatherKey}`);
+        const fetchedData = await response.json();
+        setData(JSON.stringify(fetchedData));
+        setLoading(false);
+    }, [bbb]);
+
     return (
        <div>
-           <button onClick={forecast}>press me please</button>
-           <Conditions responseObj={responseObj}/>
+           {loading ? <div>...loading</div> : <Conditions responseObj = {JSON.parse(data)}/>}
        </div>
     )
 }
-
-export default Weatherapp;
+export default Weatherapp

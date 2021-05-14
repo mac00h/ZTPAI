@@ -1,5 +1,5 @@
-import { CreateUserDTO } from "./dto/create-user.dto";
-import { UserDTO } from "./dto/user.dto";
+import { CreateUserDTO } from "./dto/create-user.dto"
+import { UserDTO } from "./dto/user.dto"
 
 export class UserAPI {
     public static async getAll(): Promise<UserDTO[]>{
@@ -7,8 +7,8 @@ export class UserAPI {
             method: "GET"
         })
 
-        const data = await resp.json();
-        return data;
+        const data = await resp.json()
+        return data
     }
 
     public static async createOne(createRequest: CreateUserDTO){
@@ -20,7 +20,7 @@ export class UserAPI {
             body: JSON.stringify(createRequest)
         })
 
-        const data = await resp.json();
-        return data;
+        const data = await resp.json()
+        return data
     }
 }
