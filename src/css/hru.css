@@ -4,15 +4,25 @@
     box-sizing: border-box;
 }
 
-.home {
-    
+.hru{
+    text-align: center;
 }
 
-.home h2{
-    margin: 50px;
+.hru .hru-container{
+    display: flex;
 }
 
-.home button{
+.faces{
+    margin-top: 50px;
+}
+
+#saveform{
+    margin-left: 150px;
+    width: 200px;
+    height: 200px;
+}
+
+.hru button{
     border: 0;
     background:none;
     display: block;
@@ -26,10 +36,6 @@
     cursor: pointer;
 }
 
-.home button:hover{
+.hru button:hover{
     background: #8bce8e;
-}
-
-.home .cnt{
-    display: flex;
 }
