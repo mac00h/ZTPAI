@@ -1,5 +1,6 @@
 import '../css/preferences.css'
-const UserPreferences = () => {
+import { useState, useEffect } from 'react';
+const UserPreferences = (props) => {
 
     const genres = [
         "acoustic","afrobeat","alt-rock","alternative","ambient","black-metal","blues","breakbeat",
@@ -12,17 +13,49 @@ const UserPreferences = () => {
         "sad","salsa","samba","sleep","soul","spanish","study",
         "summer","swedish","tango","techno"];
 
+    const [firstG, setFirstG] = useState('null')
+    const [secondG, setSecondG] = useState('null')
+    const [thirdG, setThirdG] = useState('null')
+    const [state, setState] = useState(0)
+
+    const handleClick = (ev) => {
+        console.log(ev)
+        const bt = document.getElementById(ev)
+        bt.setAttribute("disabled", "true")
+
+        if(state === 0){
+            setFirstG(ev)
+            setState(state+1)
+        }
+
+        if(state === 1){
+            setSecondG(ev)
+            setState(state+1)
+        }
+
+        if(state === 2){
+            setThirdG(ev)
+            setState(state+1)
+        }
+    }
+
+    useEffect(() => {
+        if(state === 3){
+            props.passGenres({
+                first: firstG,
+                second: secondG,
+                third: thirdG
+            })
+        }
+    }, [state])
+
     return (
         <div className="preferences">
             Select up to three genres you enjoy:
             <div className="genres">
                 {genres.map((e, i) => (
-                    <button key={i}>{e}</button>
+                    <button key={i} id={e} onClick={() => handleClick(e)}>{e}</button>
                 ))}
-            </div>
-            <div className="artist">
-                Provide us one artist you enjoy:
-                <input></input>
             </div>
         </div>
     );
