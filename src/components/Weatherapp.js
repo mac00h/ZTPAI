@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 
 const Weatherapp = () => {
     const location = useGeoLocation()
-    let lat 
-    let lon
+    let lat = 49.88214;
+    let lon = 19.22333;
     let bbb = false;
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ const Weatherapp = () => {
         const fetchedData = await response.json();
         setData(JSON.stringify(fetchedData));
         setLoading(false);
-    }, [bbb]);
+    }, [lat]);
 
     return (
        <div>

@@ -30,19 +30,19 @@ const Register = () => {
         <div className="registerContainer">
             <div className="emailCon">
                 Email:
-                <input type="text" autocomplete="off" value={emailValue || ""} onChange={e => setEmailValue(e.target.value)}/>
+                <input type="text" autoComplete="off" value={emailValue || ""} onChange={e => setEmailValue(e.target.value)}/>
             </div>
             <div className="passwordCon">
                 Password:
-                <input type="text" autocomplete="off" value={passwordValue || ""} onChange={e => setPasswordValue(e.target.value)}/>
+                <input type="text" autoComplete="off" value={passwordValue || ""} onChange={e => setPasswordValue(e.target.value)}/>
             </div>
             <div className="usernameCon">
                 Username:
-                <input type="text" autocomplete="off" value={usernameValue || ""} onChange={e => setUsernameValue(e.target.value)}/>
+                <input type="text" autoComplete="off" value={usernameValue || ""} onChange={e => setUsernameValue(e.target.value)}/>
             </div>
             <div className="ageCon">
                 Age:
-                <input type="text" autocomplete="off" value={ageValue || ""} onChange={e => setAgeValue(e.target.value)}/>
+                <input type="text" autoComplete="off" value={ageValue || ""} onChange={e => setAgeValue(e.target.value)}/>
             </div>
             <button onClick={addUser}>Register me!</button>
         </div>

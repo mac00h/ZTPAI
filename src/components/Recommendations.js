@@ -5,9 +5,9 @@ import Songs from './Songs'
 const spotifyID = process.env.REACT_APP_SPOTIFY_ID
 const spotifySecret = process.env.REACT_APP_SPOTIFY_SECRET
 
-const Recommendations = () => {
+const Recommendations = (props) => {
 
-    const [token, setToken] = useState('')
+    const [token, setToken] = useState('null')
     const [genres, setGenres] = useState({})
     const [status, setStatus] = useState(false)
     const [loaded, setLoaded] = useState(false)
@@ -25,7 +25,7 @@ const Recommendations = () => {
             console.log(token);
         })
 
-        const result = await fetch('https://api.spotify.com/v1/recommendations?limit=12&market=US&seed_artists=6kACVPfCOnqzgfEF5ryl0x&seed_genres=blues', {
+        const result = await fetch(`https://api.spotify.com/v1/recommendations?limit=12&market=US&seed_genres=${props.genres.firstGenre}%2C%20${props.genres.secondGenre}%2C%20${props.genres.thirdGenre}`, {
             headers: {
                 'Authorization' : 'Bearer ' + token
             }
