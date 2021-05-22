@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+const Mood = require('./Mood');
+const Schema = mongoose.Schema;
+const Preferences = require('./Preferences');
 mongoose.set('useCreateIndex', true);
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -19,7 +22,20 @@ const UserSchema = mongoose.Schema({
     age: {
         type: Number,
         required: true
-    }
+    },
+    preferences: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Preferences
+        }
+    ],
+    mood: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: Mood
+        }
+    ]
 })
 
-module.exports = mongoose.model('Users', UserSchema);
+const User = mongoose.model('Users', UserSchema);
+module.exports = User;
