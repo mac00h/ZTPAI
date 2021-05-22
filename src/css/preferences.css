@@ -17,7 +17,8 @@
     margin-top: 40px;
 }
 
-.genres button:focus{
-    background: red;
+.genres button:disabled, button[disabled]{
+    background-color: rgb(118, 54, 202);
 }
+
 

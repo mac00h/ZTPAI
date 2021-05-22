@@ -4,6 +4,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { registerValidation, loginValidation } = require('../validation');
+const verifyToken = require('./verifyToken');
 
 //get all users
 router.get('/', async (req, res) => {
@@ -51,6 +52,7 @@ router.post('/', async (req, res) => {
 
 //login
 router.post('/login', async (req, res) => {
+    //res.json({status: 'ok', data: 'fhjaasdadasdada'})
     //validate data before logging in
     const { error } = loginValidation(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -65,7 +67,15 @@ router.post('/login', async (req, res) => {
 
     //create and assign token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send(token);
+    res.header('auth-token', token).send({
+        status: 'ok', 
+        token: token
+    });
+});
+
+//check if auth
+router.get('/isUserAuth', verifyToken, (req, res) => {
+    res.send('User is authenticated');
 });
 
 //find user by username

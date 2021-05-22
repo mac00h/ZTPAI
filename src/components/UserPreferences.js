@@ -17,6 +17,7 @@ const UserPreferences = (props) => {
     const [secondG, setSecondG] = useState('null')
     const [thirdG, setThirdG] = useState('null')
     const [state, setState] = useState(0)
+    //const [howManyToGo, setHowManyToGo] = useState(3) solve this lmao
 
     const handleClick = (ev) => {
         console.log(ev)
@@ -34,7 +35,7 @@ const UserPreferences = (props) => {
         }
 
         if(state === 2){
-            setThirdG(ev)
+            setThirdG(ev)    
             setState(state+1)
         }
     }
@@ -49,6 +50,7 @@ const UserPreferences = (props) => {
         }
     }, [state])
 
+
     return (
         <div className="preferences">
             Select up to three genres you enjoy:
@@ -57,6 +59,7 @@ const UserPreferences = (props) => {
                     <button key={i} id={e} onClick={() => handleClick(e)}>{e}</button>
                 ))}
             </div>
+            {/* <h2>{howManyToGo} more to continue!</h2> solve this!*/} 
         </div>
     );
 }

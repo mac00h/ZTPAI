@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cors())
 
 const usersRouter = require('./routes/users');
-app.use('/users', usersRouter)
+app.use('/users', usersRouter);
 
 //ROUTES
 app.get('/', (req, res) => {
