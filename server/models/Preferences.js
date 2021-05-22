@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const PreferencesSchema = mongoose.Schema({
-    genre: {
+const PreferencesSchema = new Schema({
+    firstGenre: {
         type: String,
         required: true
     },
-    artist: {
+    secondGenre: {
         type: String,
-        required: false
+        required: true
+    },
+    thirdGenre: {
+        type: String,
+        required: true
     }
 })
 
-module.exports = mongoose.model('Preferences', PreferencesSchema);
+const Preferences = mongoose.model('Preferences', PreferencesSchema);
+
+module.exports = Preferences;

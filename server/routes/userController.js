@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
     });
 
     try {
-        const savedUser = await user.save();
+        await user.save();
         res.send({user: user._id});
     }catch(err) {
         res.status(400).send(err);
@@ -86,6 +86,6 @@ router.get('/:username', async (req, res) => {
     }catch(err){
         res.json({message: err});
     }
-})
+});
 
 module.exports = router;

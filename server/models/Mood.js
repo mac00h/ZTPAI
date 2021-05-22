@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const MoodSchema = mongoose.Schema({
+const MoodSchema = new Schema({
     day: {
         type: Date,
         default: Date.now,
@@ -22,5 +23,5 @@ const MoodSchema = mongoose.Schema({
         required: true
     }
 })
-
-module.exports = mongoose.model('Mood', MoodSchema);
+const Mood = mongoose.model('Mood', MoodSchema);
+module.exports = Mood;
