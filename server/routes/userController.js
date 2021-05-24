@@ -75,7 +75,11 @@ router.post('/login', async (req, res) => {
 
 //check if auth
 router.get('/isUserAuth', verifyToken, (req, res) => {
-    res.send('User is authenticated');
+    try {
+        res.send('verified');
+    }catch(err) {
+        res.status(400).send(err);
+    }
 });
 
 //find user by username
