@@ -1,35 +1,39 @@
 import { useState, useEffect } from 'react'
-import parseJwt from '../scripts/parseJWT';
-import handleError from '../scripts/handleError';
 import axios from 'axios'
 import '../css/login.css'
 import { useHistory } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 const Login = (props) => {
 
     const [usernameValue2, setUsernameValue2] = useState('');
     const [passwordValue2, setPasswordValue2] = useState('');
-    const [statusCode, setStatusCode] = useState(null);
+    const [state, setState] = useState()
     let history = useHistory();
+    let sthWrong;
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
-    const userAuthenticated = async () => {
+    const UserAuthenticated = async () => {
         await delay(1000)
         axios.get('http://localhost:4000/users/isUserAuth', {
             headers: {
-                'auth-token': localStorage.getItem('token')
+                'auth-token': Cookies.get('token')
             }
         }).then((response) => {
             console.log(response.status)
-            localStorage.setItem("isAuth", response.status)
+            Cookies.set('isAuth', response.status)
+            setState('loggedin')
+            props.status('loggedin')
+            history.push('/Home')
         }).catch((err) => {
+            Cookies.set('isAuth', 400)
+            setState('notLoggedIN')
+            props.status('notloggedin')
             console.log(err)
         });
     }
 
     const LoginUser = async () => {
-        localStorage.clear()
         fetch("http://localhost:4000/users/login", {
             method: "POST",
             headers: {
@@ -45,25 +49,12 @@ const Login = (props) => {
                 return {};
             })).then((json) => {
                 console.log(json);
-                setStatusCode(json.status)
-                localStorage.setItem("token", json.token)
+                Cookies.set('token', json.token)
             }).catch((err) => {
                 console.log('fetch failed', err)})
-        
-        userAuthenticated()
-        await delay(1100)
-        history.push('/Home')
+            UserAuthenticated()
+
     }
-
-    useEffect(() => {
-        if(statusCode === 'ok'){
-            props.status('Logout')
-        }else{
-            props.status('Login')
-        }
-    }, [statusCode])
-
-
     return (
         <div className="loginPage">
             <div className="loginContainer">
@@ -71,11 +62,13 @@ const Login = (props) => {
                     <input type="text" name="email" placeholder="Username" value={usernameValue2 || ""} onChange={e => setUsernameValue2(e.target.value)}></input>
                     <input type="password" name="password" placeholder="Password" value={passwordValue2 || ""} onChange={e => setPasswordValue2(e.target.value)}></input>
                     <button type="submit" name="submit" onClick={LoginUser}>Login</button>
+                    {sthWrong}
             </div>
             <div className="noAccount">
                 <h2>You don't have an account?</h2>
                 <button type="register" onClick={() => {history.push('/Register')}}>I want to register!</button>
             </div>
+            {state}
         </div>
     );
 }

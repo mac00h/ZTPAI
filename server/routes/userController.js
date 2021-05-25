@@ -66,12 +66,33 @@ router.post('/login', async (req, res) => {
     if(!validPass) return res.status(400).send('Invalid password.');
 
     //create and assign token
-    const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
+    // const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, );
+    const token = generateToken({_id:user._id})
+    // const refreshToken = jwt.sign({_id: user._id}, process.env.REFRESH_TOKEN_SECRET);
+    // refreshTokens.push(refreshToken)
     res.header('auth-token', token).send({
         status: 'ok', 
-        token: token
+        token: token,
+        // refreshtoken: refreshToken
     });
 });
+
+// let refreshTokens = []
+
+// router.post('/token', (req, res) => {
+//     const refreshToken = req.body.token
+//     if(refreshToken == null) return res.sendStatus(401)
+//     if(!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
+//     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+//         if(err) return res.sendStatus(403)
+//         const accessToken = generateToken({_id: user._id})
+//         res.json({accessToken: accessToken})
+//     })
+// })
+
+function generateToken(id){
+    return jwt.sign(id, process.env.TOKEN_SECRET);
+}
 
 //check if auth
 router.get('/isUserAuth', verifyToken, (req, res) => {

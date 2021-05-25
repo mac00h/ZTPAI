@@ -2,17 +2,20 @@ import weamuseLogo from '../img/weamuseLogo.svg';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
 const Navbar = (props) => {
-
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     let history = useHistory();
-    let logout;
+    const [logValue, setLogValue] = useState()
     function handleClick() {
-        localStorage.clear();
+        Cookies.set('token', null)
+        Cookies.set('isAuth', null)
         history.push('/')
+        window.location.reload()
     }
-    if(props.status === 'Logout'){
-        logout = <button onClick={handleClick}>{props.status}</button>
-    }
+    useEffect(() => {
+        setLogValue(props.status)
+    }, [props.status])
     return (
         <nav className="navbar">
             <img src = {weamuseLogo} alt="Logo"/>
@@ -20,7 +23,7 @@ const Navbar = (props) => {
                 <Link to="/Home">Home</Link>
                 <Link to="/About">About</Link>
                 <Link to="/Register">Register</Link>
-                {logout}
+                <button onClick={handleClick}>{logValue}</button>
             </div>
         </nav>
      );
