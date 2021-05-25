@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import Cookies from 'js-cookie'
 const useGeoLocation = () => {
     const [location, setLocation] = useState({ 
         loaded: false, 
@@ -14,6 +14,8 @@ const useGeoLocation = () => {
                 lng: location.coords.longitude,
             },
         });
+        Cookies.set('latitude', location.coords.latitude)
+        Cookies.set('longitude', location.coords.longitude)
     };
 
     const onError = error => {
