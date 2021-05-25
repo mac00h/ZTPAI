@@ -15,22 +15,25 @@ const Login = (props) => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const UserAuthenticated = async () => {
         await delay(1000)
-        axios.get('http://localhost:4000/users/isUserAuth', {
+        const data = await axios.get('http://localhost:4000/users/isUserAuth', {
             headers: {
                 'auth-token': Cookies.get('token')
             }
         }).then((response) => {
-            console.log(response.status)
+            console.log(response)
             Cookies.set('isAuth', response.status)
-            setState('loggedin')
-            props.status('loggedin')
+            // setState('loggedin')
+            // props.status('loggedin')
             history.push('/Home')
+            window.location.reload()
+            // window.location.reload()
         }).catch((err) => {
             Cookies.set('isAuth', 400)
-            setState('notLoggedIN')
-            props.status('notloggedin')
+            // setState('notLoggedIN')
+            // props.status('notloggedin')
             console.log(err)
         });
+        return data;
     }
 
     const LoginUser = async () => {

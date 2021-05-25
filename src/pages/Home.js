@@ -4,11 +4,12 @@ import Weatherapp from '../components/Weatherapp';
 import UserPreferences from '../components/UserPreferences'
 import HowAreYou from '../components/HowAreYou'
 import Recommendations from '../components/Recommendations';
-import User from '../components/User';
+import { useHistory } from 'react-router-dom'
 
-const Home = () => {
+const Home = (props) => {
     let loadedComponent;
     let button;
+    let history = useHistory()
     const [load, setLoad] = useState(0)
     const [userMood, setUserMood] = useState('null');
     const [userGenres, setUserGenres] = useState({
@@ -44,9 +45,15 @@ const Home = () => {
 
     return (
         <div className="home">
+            <div>
+                {props.isUser ? <div className="cont"> 
+                    <Weatherapp/>
+                    {loadedComponent}
+                </div> : 
             <div className="cnt">
-            <Weatherapp/>
-            {loadedComponent}
+                <h1>You must be logged in to see this page.</h1>
+                <button onClick={() => history.push('/')}>I want to login!</button>
+            </div>}
             </div>
         </div>
     );

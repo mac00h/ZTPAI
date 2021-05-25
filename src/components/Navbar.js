@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 const Navbar = (props) => {
-    const delay = ms => new Promise(res => setTimeout(res, ms));
     let history = useHistory();
     const [logValue, setLogValue] = useState()
     function handleClick() {
-        Cookies.set('token', null)
-        Cookies.set('isAuth', null)
+        Cookies.remove('token')
+        Cookies.remove('isAuth')
+        Cookies.remove('weatherData')
+        Cookies.remove('latitude')
+        Cookies.remove('longitude')
         history.push('/')
         window.location.reload()
     }
@@ -22,7 +24,7 @@ const Navbar = (props) => {
             <div className="links">
                 <Link to="/Home">Home</Link>
                 <Link to="/About">About</Link>
-                <Link to="/Register">Register</Link>
+                {logValue === 'Logout' ? null : <Link to="/Register">Register</Link>}
                 <button onClick={handleClick}>{logValue}</button>
             </div>
         </nav>

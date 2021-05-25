@@ -37,9 +37,11 @@ const Recommendations = (props) => {
     }, [status])
 
     return (
-        <div>
+        <div >
             {genres.tracks ? <Songs responseObj = {genres}/> : null}
-            <button onClick={()=>setStatus(!status)}>Press me to fetch songs.</button>
+            <div className="reco">
+            <button className="fetchSongs" onClick={()=>setStatus(!status)}>Press me to fetch songs.</button>
+            </div>
         </div>
     );
 }

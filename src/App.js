@@ -11,54 +11,36 @@ import { useState, useEffect } from 'react'
 import auth, {serverAuth} from './scripts/auth';
 import Cookies from 'js-cookie'
 function App() {
-
   const [statusValue, setStatusValue] = useState()
-  const [test, setTest] = useState()
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState()
   useEffect(() => {
-    if(console.log(Cookies.get('isAuth')) === 200){
-      setTest('HEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE')
+    if(Cookies.get('isAuth')){
+      setIsUserAuthenticated(true)
       setStatusValue('Logout')
     }else{
-      setTest('YHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH')
+      setIsUserAuthenticated(false)
       setStatusValue('Login')
     } 
-  }, [])
-    // useEffect(() => {
-    //   if(statusValue === 'loggedin'){
-    //   
-    //     setStatusValue('Logout')
-    //   }
-    //   if(statusValue === 'notloggedin'){
-    //     
-    //     setStatusValue('Login')
-    //   }
-    // }, [statusValue]);
+  }, [Cookies.get('isAuth')])
+
   return(
     <Router>
       <div className="App">
         <Navbar status = {statusValue}/>
-        <h1>{test}</h1>
-        <h1>{statusValue}</h1>
         <div className="content">
           <Switch>
             <Route exact path="/">
-            {/* status = {statValue => setStatusValue(statValue)} */}
-              <Login status = {statValue => setStatusValue(statValue)}/>
+              <Login />
             </Route>
-            <Route path="/Home">
-              <Home/>
+            <Route path="/Home"> 
+              <Home isUser = {isUserAuthenticated}/>
             </Route>
-            <Route path="/About"
-              render={() => statusValue !== null ? <About/> : <h1>You can't view this page. Log in first! Redirecting... <Redirect to="/"/></h1> }/>
-            <Route path="/HowAreYou">
-              <HowAreYou/>
+            <Route path="/About">
+              <About/>
             </Route>
-            <Route path="/UserPreferences">
-              <UserPreferences/>
-            </Route>
-            <Route path="/Recommendations">
-              <Recommendations/>
-            </Route>
+            <Route path="/HowAreYou" render={() => ( isUserAuthenticated ? <HowAreYou/> : <Redirect to='/'/>)}/>
+            <Route path="/UserPreferences" render={() => ( isUserAuthenticated ?  <UserPreferences/> : <Redirect to='/'/>)}/>
+            <Route path="/Recommendations" render={() => ( isUserAuthenticated ?  <Recommendations/> : <Redirect to='/'/>)}/>
             <Route path="/Register">
               <Register/>
             </Route>

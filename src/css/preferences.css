@@ -18,7 +18,7 @@
 }
 
 .genres button:disabled, button[disabled]{
-    background-color: rgb(118, 54, 202);
+    background: #2ecc71;
 }
 
 

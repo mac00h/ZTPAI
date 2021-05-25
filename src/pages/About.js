@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { UserAPI } from '../api/user.api';
-import { UserDTO } from '../api/dto/user.dto';
-import User from '../components/User';
-
+import react from '../img/reactIcon.png'
+import nodejs from '../img/nodejslogo.png'
+import mongo from '../img/mongologo.png'
+import '../css/about.css'
 const About = () => {
-
-    const[user, setUser] = useState([])
-
-    useEffect(() => {
-        async function fetchAll() {
-            const resp = await UserAPI.getAll();
-            setUser(resp);
-        }
-
-        fetchAll();
-    }, [])
     return (  
         <div className="about">
-            <h2>This is about page.</h2>
-            <ul>
-            {user.map((userr) => {
-                return <User data={userr}/>;
-            })}
-            </ul>
+            <h2>This page uses:</h2>
+            <div className="technologies">
+                <img className="react" src={react}/>
+                <img className="nodejs" src={nodejs}/>
+                <img className="mongo" src={mongo}/>
+            </div>
         </div>
     );
 }

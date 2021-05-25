@@ -1,0 +1,14 @@
+.technologies{
+    display: flex;
+}
+
+.technologies img{
+    margin-top: 50px;
+    align-self: center;
+}
+
+.nodejs{
+    object-fit:contain;
+    width: 100%;
+    height: 250px;
+}
