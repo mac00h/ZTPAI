@@ -5,7 +5,7 @@ const Songs = (props) => {
         <div className="songsDiv">
             {props.responseObj.tracks.map((e) => {
                 return props.responseObj.tracks ? 
-                <div className="trackContainer">
+                <div className="trackContainer" key={e.id}>
                     <div className="albumCover">
                         <img src = {e.album.images[1].url}/>
                     </div>
