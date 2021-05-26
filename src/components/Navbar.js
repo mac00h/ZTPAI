@@ -12,6 +12,7 @@ const Navbar = (props) => {
         Cookies.remove('weatherData')
         Cookies.remove('latitude')
         Cookies.remove('longitude')
+        Cookies.remove('spotifyToken')
         history.push('/')
         window.location.reload()
     }

@@ -36,7 +36,7 @@ const Login = (props) => {
         return data;
     }
 
-    const LoginUser = async () => {
+    const LoginUser = () => {
         fetch("http://localhost:4000/users/login", {
             method: "POST",
             headers: {
