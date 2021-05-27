@@ -11,11 +11,13 @@ const Home = (props) => {
     let button;
     let history = useHistory()
     const [load, setLoad] = useState(0)
+    const [weatherData, setWeatherData] = useState()
     const [userMood, setUserMood] = useState('null');
     const [userGenres, setUserGenres] = useState({
         firstGenre: 'null',
         secondGenre: 'null',
-        thirdGenre: 'null'
+        thirdGenre: 'null',
+        userArtists: 'null'
     })
 
     if(load === 0){
@@ -27,10 +29,12 @@ const Home = (props) => {
     }
 
     if(load === 1){
-        loadedComponent = <UserPreferences passGenres = {genres => setUserGenres({
-            firstGenre: genres.first,
-            secondGenre: genres.second,
-            thirdGenre: genres.third
+        loadedComponent = <UserPreferences passGenres = {user => setUserGenres({
+            firstGenre: user.first,
+            secondGenre: user.second,
+            thirdGenre: user.third,
+            userArtists: user.artist
+
         })}/>
         if(userGenres.thirdGenre !== 'null'){
             setLoad(load+1)
@@ -39,21 +43,22 @@ const Home = (props) => {
     }
 
     if(load === 2){
-        loadedComponent = <Recommendations mood = {userMood} genres = {userGenres}/>
+        loadedComponent = <Recommendations mood = {userMood} genres = {userGenres} weather = {weatherData}/>
         button = null
     }
 
     return (
         <div className="home">
             <div>
-                {props.isUser ? <div className="cont"> 
-                    <Weatherapp/>
+                {props.isUser ? 
+                <div className="cont"> 
+                    <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
                     {loadedComponent}
                 </div> : 
-            <div className="cnt">
-                <h1>You must be logged in to see this page.</h1>
-                <button onClick={() => history.push('/')}>I want to login!</button>
-            </div>}
+                <div className="cnt">
+                    <h1>You must be logged in to see this page.</h1>
+                    <button onClick={() => history.push('/')}>I want to login!</button>
+                </div>}
             </div>
         </div>
     );

@@ -17,6 +17,7 @@ const UserPreferences = (props) => {
     const [secondG, setSecondG] = useState('null')
     const [thirdG, setThirdG] = useState('null')
     const [state, setState] = useState(0)
+    const [userArtist, setUserArtist] = useState()
     //const [howManyToGo, setHowManyToGo] = useState(3) solve this lmao
 
     const handleClick = (ev) => {
@@ -45,11 +46,11 @@ const UserPreferences = (props) => {
             props.passGenres({
                 first: firstG,
                 second: secondG,
-                third: thirdG
+                third: thirdG,
+                artist: userArtist
             })
         }
     }, [state])
-
 
     return (
         <div className="preferences">
@@ -59,6 +60,8 @@ const UserPreferences = (props) => {
                     <button key={i} id={e} onClick={() => handleClick(e)}>{e}</button>
                 ))}
             </div>
+            <input type="text" name="userArtist" placeholder="your artist" value={userArtist || ""} onChange={e => setUserArtist(e.target.value)}></input>
+            {/* <h1>SLIDER FOR SONG POPULARITY</h1> */}
             {/* <h2>{howManyToGo} more to continue!</h2> solve this!*/} 
         </div>
     );
