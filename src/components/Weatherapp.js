@@ -4,7 +4,7 @@ import useGeoLocation from '../scripts/useGeoLocation'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
-const Weatherapp = () => {
+const Weatherapp = (props) => {
     const [data, setData] = useState();
     const [loading, setLoading] = useState(true);
     const weatherKey = process.env.REACT_APP_WEATHERMAP
@@ -22,6 +22,7 @@ const Weatherapp = () => {
                 console.log(json);
                 Cookies.set('weatherData', JSON.stringify(json))
                 setData(JSON.stringify(json))
+                props.passWeatherData(JSON.stringify(json))
                 setLoading(false)
             }).catch((err) => {
                 console.log('fetch failed', err)
