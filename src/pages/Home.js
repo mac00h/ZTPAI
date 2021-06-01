@@ -5,11 +5,14 @@ import UserPreferences from '../components/UserPreferences'
 import HowAreYou from '../components/HowAreYou'
 import Recommendations from '../components/Recommendations';
 import { useHistory } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import ApplyVariables from '../scripts/ApplyVariables';
 
 const Home = (props) => {
     let loadedComponent;
     let button;
     let history = useHistory()
+    
     const [load, setLoad] = useState(0)
     const [weatherData, setWeatherData] = useState()
     const [userMood, setUserMood] = useState('null');
@@ -24,9 +27,11 @@ const Home = (props) => {
         loadedComponent = <HowAreYou passMood = {mood => setUserMood(mood)}/>
         if(userMood !== 'null'){
             setLoad(load+1)
-            console.log('mood loaded')
+            console.log('mood loaded', userMood)
         }
     }
+
+    let SpotifySeeds = ApplyVariables(userMood)
 
     if(load === 1){
         loadedComponent = <UserPreferences passGenres = {user => setUserGenres({
@@ -43,9 +48,11 @@ const Home = (props) => {
     }
 
     if(load === 2){
-        loadedComponent = <Recommendations mood = {userMood} genres = {userGenres} weather = {weatherData}/>
+        loadedComponent = <Recommendations genres = {userGenres} seeds = {SpotifySeeds}/>
         button = null
     }
+
+    
 
     return (
         <div className="home">

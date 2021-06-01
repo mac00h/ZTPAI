@@ -18,28 +18,68 @@ const UserPreferences = (props) => {
     const [thirdG, setThirdG] = useState('null')
     const [state, setState] = useState(0)
     const [userArtist, setUserArtist] = useState()
-    //const [howManyToGo, setHowManyToGo] = useState(3) solve this lmao
-
+    const [artistVisible, setArtistVisible] = useState(false)
+    const [howManyToGo, setHowManyToGo] = useState(3) //solve this lmao
+    const [test, setTest] = useState('Three more to go!') 
     const handleClick = (ev) => {
         console.log(ev)
         const bt = document.getElementById(ev)
         bt.setAttribute("disabled", "true")
 
+        // switch(state){
+        //     case(0):
+        //         setFirstG(ev)
+        //         test = <h3>Two more to go!</h3>
+        //         setState(state+1)
+        //     break;
+
+        //     case(1):
+        //         setSecondG(ev)
+        //         test = <h3>One more to go!</h3>
+        //         setState(state+1)
+        //     break;
+
+        //     case(2):
+        //         setThirdG(ev)
+        //         setState(state+1)
+        //     break;
+                
+        // }
+        
         if(state === 0){
             setFirstG(ev)
-            setState(state+1)
+            setHowManyToGo(howManyToGo-1)
         }
 
         if(state === 1){
             setSecondG(ev)
-            setState(state+1)
+            setHowManyToGo(howManyToGo-1)
         }
 
         if(state === 2){
             setThirdG(ev)    
-            setState(state+1)
+            setHowManyToGo(howManyToGo-1)
         }
     }
+
+    useEffect(() => {
+        switch(howManyToGo){
+            case(2):
+                setTest('Two more to go!')
+                setState(state+1)
+            break;
+
+            case(1):
+                setTest('One more to go!')
+                setState(state+1)
+            break;
+
+            case(0):
+                setTest('All gucci!')
+                setState(state+1)
+            break;
+        }
+    }, [howManyToGo])
 
     useEffect(() => {
         if(state === 3){
@@ -62,7 +102,8 @@ const UserPreferences = (props) => {
             </div>
             <input type="text" name="userArtist" placeholder="your artist" value={userArtist || ""} onChange={e => setUserArtist(e.target.value)}></input>
             {/* <h1>SLIDER FOR SONG POPULARITY</h1> */}
-            {/* <h2>{howManyToGo} more to continue!</h2> solve this!*/} 
+            {/* <h2>{howManyToGo} more to continue!</h2> solve this!*/}
+            <h3>{test}</h3> 
         </div>
     );
 }
