@@ -17,48 +17,29 @@ const UserPreferences = (props) => {
     const [secondG, setSecondG] = useState('null')
     const [thirdG, setThirdG] = useState('null')
     const [state, setState] = useState(0)
-    const [userArtist, setUserArtist] = useState()
-    const [artistVisible, setArtistVisible] = useState(false)
-    const [howManyToGo, setHowManyToGo] = useState(3) //solve this lmao
+    const [howManyToGo, setHowManyToGo] = useState(3)
     const [test, setTest] = useState('Three more to go!') 
     const handleClick = (ev) => {
         console.log(ev)
         const bt = document.getElementById(ev)
         bt.setAttribute("disabled", "true")
 
-        // switch(state){
-        //     case(0):
-        //         setFirstG(ev)
-        //         test = <h3>Two more to go!</h3>
-        //         setState(state+1)
-        //     break;
+        switch(state){
+            case(0):
+                setFirstG(ev)
+                setHowManyToGo(howManyToGo-1)
+            break;
 
-        //     case(1):
-        //         setSecondG(ev)
-        //         test = <h3>One more to go!</h3>
-        //         setState(state+1)
-        //     break;
+            case(1):
+                setSecondG(ev)
+                setHowManyToGo(howManyToGo-1)
+            break;
 
-        //     case(2):
-        //         setThirdG(ev)
-        //         setState(state+1)
-        //     break;
+            case(2):
+                setThirdG(ev)
+                setHowManyToGo(howManyToGo-1)
+            break;
                 
-        // }
-        
-        if(state === 0){
-            setFirstG(ev)
-            setHowManyToGo(howManyToGo-1)
-        }
-
-        if(state === 1){
-            setSecondG(ev)
-            setHowManyToGo(howManyToGo-1)
-        }
-
-        if(state === 2){
-            setThirdG(ev)    
-            setHowManyToGo(howManyToGo-1)
         }
     }
 
@@ -86,23 +67,19 @@ const UserPreferences = (props) => {
             props.passGenres({
                 first: firstG,
                 second: secondG,
-                third: thirdG,
-                artist: userArtist
+                third: thirdG
             })
         }
     }, [state])
 
     return (
         <div className="preferences">
-            Select up to three genres you enjoy:
+            <h3>Select three genres you enjoy listening to.</h3>
             <div className="genres">
                 {genres.map((e, i) => (
                     <button key={i} id={e} onClick={() => handleClick(e)}>{e}</button>
                 ))}
             </div>
-            <input type="text" name="userArtist" placeholder="your artist" value={userArtist || ""} onChange={e => setUserArtist(e.target.value)}></input>
-            {/* <h1>SLIDER FOR SONG POPULARITY</h1> */}
-            {/* <h2>{howManyToGo} more to continue!</h2> solve this!*/}
             <h3>{test}</h3> 
         </div>
     );

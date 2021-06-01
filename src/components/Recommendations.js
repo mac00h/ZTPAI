@@ -50,9 +50,9 @@ const Recommendations = (props) => {
         getToken()
     }, [])
     
-    const getRecommendations = (genres, id, seeds) => {
+    const getRecommendations = (genres, id, seeds, popularity) => {
         if(token !== 'null'){
-            axios(`https://api.spotify.com/v1/recommendations?limit=12&market=US&seed_artists=${id}&seed_genres=${genres.firstGenre}%2C%20${genres.secondGenre}%2C%20${genres.thirdGenre}&target_energy=${seeds.energy}&min_tempo=${seeds.minTempo}&max_tempo=${seeds.maxTempo}&target_valence=${seeds.positivity}`, {
+            axios(`https://api.spotify.com/v1/recommendations?limit=12&market=US&seed_artists=${id}&seed_genres=${genres.firstGenre}%2C%20${genres.secondGenre}%2C%20${genres.thirdGenre}&target_energy=${seeds.energy}&min_tempo=${seeds.minTempo}&max_tempo=${seeds.maxTempo}&target_valence=${seeds.positivity}&target_popularity=${popularity}`, {
             headers: {
                 'Authorization' : 'Bearer ' + token
             },
@@ -71,13 +71,13 @@ const Recommendations = (props) => {
 
     useEffect(() => {
         if(Cookies.get('spotifyToken')){
-            getArtistID(props.genres.userArtists)
+            getArtistID(props.userinp.userArtist)
         } 
     }, [token])
 
     useEffect(() => {
         if(Cookies.get('artistID')){
-            getRecommendations(props.genres, artistID, props.seeds)
+            getRecommendations(props.genres, artistID, props.seeds, props.userinp.userPopularity)
         }
     }, [artistID])
     return (
