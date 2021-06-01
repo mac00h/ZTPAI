@@ -200,16 +200,12 @@ const ApplyVariables = (mood) => {
                 break
             }
 
-
-
+            // switch(true){
+            //     case(tmp.wind.speed < 1):
+            //     break;
+            // }
         }
-        
-        
-        // switch(tmp.wind.speed){
-        //     case()
-        // }
     })
-
     return object
 }
 

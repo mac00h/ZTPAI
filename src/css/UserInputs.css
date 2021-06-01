@@ -1,0 +1,52 @@
+.userInputs input[type="text"], .userInputs input[type="userArtist"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.userInputs input[type="text"]:focus,.userInputs input[type="password"]:focus{
+    width: 280px;
+    border-color: #3498db;
+}
+
+
+input[type="range"] {
+    width: 700px;
+    background-color: limegreen;
+    appearance: auto;
+    color: limegreen;
+    cursor: pointer;
+    margin: 10px;
+    padding: 20px;
+}
+
+.userInputs{
+    display: flex;
+    margin-top: -30px;
+    margin-left: 130px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artistDiv h2{
+    margin-bottom: 10px;
+}
+
+.sliderDiv{
+    text-align: center;
+}
+
+.sliderDiv h2{
+    margin-bottom: 10px;
+}
+
+
+
