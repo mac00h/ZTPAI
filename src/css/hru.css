@@ -6,20 +6,23 @@
 
 .hru{
     text-align: center;
+    margin-left: -300px;
 }
 
-.hru .hru-container{
+.hru-container{
     display: flex;
+    margin-left: -100px;
 }
 
 .faces{
     margin-top: 50px;
+    flex-grow: 1;
 }
 
 #saveform{
     margin-left: 150px;
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
 }
 
 .hru button{

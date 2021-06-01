@@ -4,7 +4,7 @@ import '../css/login.css'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
-const Login = (props) => {
+const Login = () => {
 
     const [usernameValue2, setUsernameValue2] = useState('');
     const [passwordValue2, setPasswordValue2] = useState('');
@@ -22,15 +22,10 @@ const Login = (props) => {
         }).then((response) => {
             console.log(response)
             Cookies.set('isAuth', response.status)
-            // setState('loggedin')
-            // props.status('loggedin')
             history.push('/Home')
             window.location.reload()
-            // window.location.reload()
         }).catch((err) => {
             Cookies.set('isAuth', 400)
-            // setState('notLoggedIN')
-            // props.status('notloggedin')
             console.log(err)
         });
         return data;

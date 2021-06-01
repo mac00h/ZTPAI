@@ -68,46 +68,18 @@ const Home = (props) => {
             button = null
         break;
     }
-    
-
-    // if(load === 0){
-    //     loadedComponent = <HowAreYou passMood = {mood => setUserMood(mood)}/>
-    //     if(userMood !== 'null'){
-    //         setLoad(load+1)
-    //         console.log('mood loaded', userMood)
-    //     }
-    // }
-
-    // let SpotifySeeds = ApplyVariables(userMood)
-
-    // if(load === 1){
-    //     loadedComponent = <UserPreferences passGenres = {user => setUserGenres({
-    //         firstGenre: user.first,
-    //         secondGenre: user.second,
-    //         thirdGenre: user.third,
-    //         userArtists: user.artist
-
-    //     })}/>
-    //     if(userGenres.thirdGenre !== 'null'){
-    //         setLoad(load+1)
-    //         console.log('genres loaded')
-    //     }
-    // }
-
-    // if(load === 2){
-    //     loadedComponent = <Recommendations genres = {userGenres} seeds = {SpotifySeeds}/>
-    //     button = null
-    // }
-
-    
 
     return (
         <div className="home">
             <div>
                 {props.isUser ? 
                 <div className="cont"> 
-                    <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
-                    {loadedComponent}
+                    <div className="weatherDiv">
+                        <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
+                    </div>
+                    <div className="contentDiv">
+                        {loadedComponent}
+                    </div>
                 </div> : 
                 <div className="cnt">
                     <h1>You must be logged in to see this page.</h1>
