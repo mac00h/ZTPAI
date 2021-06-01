@@ -84,7 +84,7 @@ const Recommendations = (props) => {
         <div >
             {loaded ? <Songs responseObj = {genres}/> : <h2>Loading recommendations..</h2>}
             <div className="reco">
-            <button className="fetchSongs" onClick={() => getRecommendations(props.genres, artistID, props.seeds)}>Refresh songs</button>
+            {/* <button className="fetchSongs" onClick={() => getRecommendations(props.genres, artistID, props.seeds, props.userinp.userPopularity)}>Refresh songs</button> */}
             </div>
         </div>
     );

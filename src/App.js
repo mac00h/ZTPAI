@@ -8,8 +8,8 @@ import UserPreferences from './components/UserPreferences';
 import Recommendations from './components/Recommendations';
 import Login from './pages/Login';
 import { useState, useEffect } from 'react'
-import auth, {serverAuth} from './scripts/auth';
 import Cookies from 'js-cookie'
+
 function App() {
   const [statusValue, setStatusValue] = useState()
   const [isUserAuthenticated, setIsUserAuthenticated] = useState()
@@ -30,7 +30,7 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <Login />
+              <Login/>
             </Route>
             <Route path="/Home"> 
               <Home isUser = {isUserAuthenticated}/>
