@@ -8,7 +8,6 @@ require('dotenv/config');
 app.use(express.json())
 app.use(cors())
 
-
 //userRouter
 const usersRouter = require('./routes/userController');
 app.use('/users', usersRouter);
@@ -20,7 +19,6 @@ app.use('/mood', moodRouter);
 //preferencesRouter
 const preferencesRouter = require('./routes/preferencesController');
 app.use('/pref', preferencesRouter);
-
 
 //ROUTES
 app.get('/', (req, res) => {

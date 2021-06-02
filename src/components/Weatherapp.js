@@ -19,7 +19,6 @@ const Weatherapp = (props) => {
                 console.log(err)
                 return {};
             })).then((json) => {
-                console.log(json);
                 Cookies.set('weatherData', JSON.stringify(json))
                 setData(JSON.stringify(json))
                 props.passWeatherData(JSON.stringify(json))

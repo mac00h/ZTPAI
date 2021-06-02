@@ -8,16 +8,17 @@ import UserInputs from '../components/UserInputs';
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import ApplyVariables from '../scripts/ApplyVariables';
+import jwt_decode from 'jwt-decode'
 
 const Home = (props) => {
     let loadedComponent;
     let button;
     let history = useHistory()
-    
+    let token2 = Cookies.get('token')
+    let decoded = jwt_decode(token2)
     const [load, setLoad] = useState(0)
     const [weatherData, setWeatherData] = useState()
     const [userMood, setUserMood] = useState('null');
-
     const [userInputs, setUserInputs] = useState({
         userArtist: 'null',
         userPopularity: 'null'
@@ -29,7 +30,30 @@ const Home = (props) => {
         thirdGenre: 'null'
     })
 
+    const addUserMood = async (mood, weadata) => {
+        const resp = await fetch(`http://localhost:4000/mood/${decoded._id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                forcast: weadata.weather[0].description,
+                mood: mood,
+                location: weadata.name
+            })
+        })
+
+        const data = await resp.json()
+        console.log("moodTableUpdated: ", data)
+        return data
+    }
+
     let SpotifySeeds = ApplyVariables(userMood)
+    useEffect(() => {
+        if(userMood !== 'null'){
+            addUserMood(userMood, weatherData)
+        }
+    }, [userMood])
     switch(load){
         case(0):
             loadedComponent = <HowAreYou passMood = {mood => setUserMood(mood)}/>
@@ -55,7 +79,6 @@ const Home = (props) => {
                 firstGenre: user.first,
                 secondGenre: user.second,
                 thirdGenre: user.third
-
             })}/>
             if(userGenres.thirdGenre !== 'null'){
                 setLoad(load+1)

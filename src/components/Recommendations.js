@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Songs from './Songs'
 import Cookies from 'js-cookie'
+import jwt_decode from 'jwt-decode'
 
 const Recommendations = (props) => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -68,6 +69,31 @@ const Recommendations = (props) => {
             console.log('token is not ready')
         }
     }
+    let token2 = Cookies.get('token')
+    let decoded = jwt_decode(token2)
+    const postUserPreferences = async (genres, artistname, popularity) => {
+        const resp = await fetch(`http://localhost:4000/pref/${decoded._id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                firstGenre: genres.firstGenre,
+                secondGenre: genres.secondGenre,
+                thirdGenre: genres.thirdGenre,
+                optionalArtist: artistname,
+                optionalPopularity: popularity
+            })
+        })
+
+        const data = await resp.json()
+        console.log('preferences for user ', decoded._id, " added")
+        return data
+    }
+
+    useEffect(() => {
+        postUserPreferences(props.genres, props.userinp.userArtist, props.userinp.userPopularity)
+    }, [])
 
     useEffect(() => {
         if(Cookies.get('spotifyToken')){

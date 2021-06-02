@@ -5,7 +5,7 @@ const UserInputs = (props) => {
 
     const [userArtist, setUserArtist] = useState()
     const [userPopularity, setUserPopuluserPopularity] = useState(50)
-    let sliderValue = <div>Not so popular</div>;
+    let sliderValue = <div>I'm not sure..</div>;
     function handleClick() {
         props.passInputs({
             artist: userArtist,
