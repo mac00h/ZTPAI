@@ -27,7 +27,9 @@ router.post('/:id', async (req, res) => {
     const pref = new Preferences({
         firstGenre: req.body.firstGenre,
         secondGenre: req.body.secondGenre,
-        thirdGenre: req.body.thirdGenre
+        thirdGenre: req.body.thirdGenre,
+        optionalArtist: req.body.optionalArtist,
+        optionalPopularity: req.body.optionalPopularity
     });
 
     try{

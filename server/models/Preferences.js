@@ -13,9 +13,16 @@ const PreferencesSchema = new Schema({
     thirdGenre: {
         type: String,
         required: true
+    },
+    optionalArtist:{
+        type: String,
+        required: false
+    },
+    optionalPopularity:{
+        type: Number,
+        required: false
     }
 })
 
 const Preferences = mongoose.model('Preferences', PreferencesSchema);
-
 module.exports = Preferences;

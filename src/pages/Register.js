@@ -24,8 +24,8 @@ const Register = () => {
         }) 
 
         const data = await resp.json()
-        console.log("new user added", data);
-        return data;
+        alert("Account created!", data.username)
+        return data
     }
 
     return (
