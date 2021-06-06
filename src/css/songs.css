@@ -1,14 +1,22 @@
+.recommended{
+    margin-top: 150px;
+    align-items: center;
+}
+
 .songsDiv{
     margin-left: 50px;
     display: grid;
     grid-template-columns: repeat(3,  1fr);
     grid-gap: 50px;
-    
 }
 
 a{
     text-decoration: none;
     display: flex;
+}
+
+a:visited{
+    color: blue;
 }
 
 .trackContainer{
@@ -23,10 +31,14 @@ a{
     background: rgb(117, 209, 117);
 }
 
+.albumCover{
+    width: 120px;
+}
+
 .albumCover img{
+    margin: 0;
     height: 100%;
-    width:55%;
-    align-self: center;
+    width:100%;
 }
 
 .songInfo{
@@ -36,8 +48,6 @@ a{
     background: white;
     align-items:center;
     justify-content:center;
-    margin-left: -135px;
-    padding: 15px;
     width: 250px;
     height: 100%;
     border-top-right-radius: 7.5px;
@@ -45,5 +55,5 @@ a{
 }
 
 .trackName{
-    margin-top: 5px;
+    margin-top: -10px;
 }

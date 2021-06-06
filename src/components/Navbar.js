@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import '../css/navbar.css'
 const Navbar = (props) => {
     let history = useHistory();
     const [logValue, setLogValue] = useState()
@@ -27,7 +28,8 @@ const Navbar = (props) => {
                 <Link to="/Home">Home</Link>
                 <Link to="/About">About</Link>
                 {logValue === 'Logout' ? null : <Link to="/Register">Register</Link>}
-                <button onClick={handleClick}>{logValue}</button>
+                {/* <Link><button onClick={handleClick}>{logValue}</button></Link> */}
+                <Link to="/" onClick={handleClick}>{logValue}</Link>
             </div>
         </nav>
      );

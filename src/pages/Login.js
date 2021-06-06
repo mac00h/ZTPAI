@@ -47,24 +47,28 @@ const Login = () => {
                 return {};
             })).then((json) => {
                 console.log(json);
+                alert(json.status)
                 Cookies.set('token', json.token)
             }).catch((err) => {
                 console.log('fetch failed', err)})
             UserAuthenticated()
-
     }
     return (
         <div className="loginPage">
             <div className="loginContainer">
-                    <h1>Login to continue!</h1>
+                <div className="logSubCon">
+                <h1>Login to continue!</h1>
                     <input type="text" name="email" placeholder="Username" value={usernameValue2 || ""} onChange={e => setUsernameValue2(e.target.value)}></input>
                     <input type="password" name="password" placeholder="Password" value={passwordValue2 || ""} onChange={e => setPasswordValue2(e.target.value)}></input>
                     <button type="submit" name="submit" onClick={LoginUser}>Login</button>
                     {sthWrong}
+                </div>
             </div>
             <div className="noAccount">
+                <div className="noaccSubCon">
                 <h2>You don't have an account?</h2>
                 <button type="register" onClick={() => {history.push('/Register')}}>I want to register!</button>
+                </div>
             </div>
             {state}
         </div>

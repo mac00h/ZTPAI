@@ -20,15 +20,15 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     //validate data before adding user to database
     const { error } = registerValidation(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(400).send({status: error.details[0].message});
 
     //check if email already exists in database
     const emailExist = await User.findOne({email: req.body.email});
-    if(emailExist) return res.status(400).send('Email already exists in database.');
+    if(emailExist) return res.status(400).send({status: 'Email already exists in database.'});
 
     //check if username already exists in database
     const usernameExist = await User.findOne({username: req.body.username});
-    if(usernameExist) return res.status(400).send('Username already exists in database.');
+    if(usernameExist) return res.status(400).send({status: 'Username already exists in database.'});
 
     //hashing the password
     const salt = await bcrypt.genSalt(10);
@@ -44,9 +44,10 @@ router.post('/', async (req, res) => {
 
     try {
         await user.save();
-        res.send({user: user._id});
+        // res.send({user: user._id});
+        res.send({status: "Account created!"})
     }catch(err) {
-        res.status(400).send(err);
+        res.status(400).send({status: err});
     }
 });
 
@@ -55,15 +56,18 @@ router.post('/login', async (req, res) => {
     //res.json({status: 'ok', data: 'fhjaasdadasdada'})
     //validate data before logging in
     const { error } = loginValidation(req.body);
-    if(error) return res.status(400).send(error.details[0].message);
+    if(error) return res.status(400).send({status: error.details[0].message});
 
     //check if username exists in database
     const user = await User.findOne({username: req.body.username});
-    if(!user) return res.status(400).send('Username does not exists in database.');
+    if(!user) {
+        res.send({status: 'Username does not exists in database.'});
+        return res.status(400)
+    }
 
     //check if password is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if(!validPass) return res.status(400).send('Invalid password.');
+    if(!validPass) return res.status(400).send({status: 'Invalid password.'});
 
     //create and assign token
     // const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, );
@@ -71,7 +75,7 @@ router.post('/login', async (req, res) => {
     // const refreshToken = jwt.sign({_id: user._id}, process.env.REFRESH_TOKEN_SECRET);
     // refreshTokens.push(refreshToken)
     res.header('auth-token', token).send({
-        status: 'ok', 
+        status: 'Logged in! Redirecting..', 
         token: token,
         // refreshtoken: refreshToken
     });

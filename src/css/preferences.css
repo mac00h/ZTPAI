@@ -11,10 +11,28 @@
     padding: 5px;
     width: 100px;
     height: 50px;
+    display: block;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px;
+    border-radius: 24px;
+    cursor: pointer;
+    background: white;
+    margin: 0 auto;
 }
 
 .genres button:disabled, button[disabled]{
     background: #2ecc71;
+    color: white;
+}
+
+@media screen and (min-width: 300px) and (max-width: 360px) and (min-height: 550px) and (max-height: 640px){
+    .genres{
+        transform: scale(0.4);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 3px;
+    }
 }
 
 

@@ -5,6 +5,11 @@
   font-family: "Quicksand";
   color: #333;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
 .navbar {
   padding: 15px;
   display: flex;
@@ -24,13 +29,11 @@
 }
 
 .navbar button {
-  margin-left: auto;
   background: none;
   border: none;
   font-size: 25px;
-  margin-left: 16px;
+  margin-left: 20px auto;
   text-decoration: none;
-  padding: 6px;
 }
 
 .navbar button:hover {
@@ -52,7 +55,9 @@ img{
 }
 
 .content {
-  max-width: 1900px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

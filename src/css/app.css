@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+    margin: 0 auto;
+    font-family: "Quicksand";
+    color: #333;
+}
+
+a:visited{
+    color: blue;
+}
+
+.App{
+    display: flex;
+    flex-direction: column;
+}
+
+.content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}

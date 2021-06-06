@@ -1,9 +1,6 @@
 .mainCon{
     display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
 }
 
 .registerContainer input[type="text"]{
@@ -56,23 +53,34 @@
 }
 
 
-.registerContainer input[type="text"]:focus, .loginContainer input[type="password"]:focus{
+.registerContainer input[type="text"]:focus, .registerContainer input[type="password"]:focus{
     width: 280px;
     border-color: #2ecc71;
 }
 
 
 .registerContainer{
-    width: 600px;
-    padding: 40px;
-    text-align: center;
     border-right: 1px solid #ccc1c1;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .gotTheAccount{
-    width: 600px;
-    margin-top: 120px;
+    width: 100%;
+    display: flex;
+    align-items: center;
     text-align: center;
+}
+
+.accsubCon{
+    margin: 0 auto;
+}
+
+.subCon{
+    margin: 0 auto;
+    
 }
 
 .gotTheAccount button[type="register"]{
@@ -93,3 +101,36 @@
 .gotTheAccount button[type="register"]:hover{
     background: #2ecc71;
 }
+
+@media screen and (max-width: 550px), (max-height: 700px){
+    .mainCon{
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2{
+        text-align: center;
+    }
+
+    .registerContainer{
+        transform: scale(0.7);
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ccc1c1;
+        margin: 0 auto;
+        margin-top: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gotTheAccount{
+        transform: scale(0.7);
+        width: 100%;
+        margin: 0 auto;
+        /* margin-top: -30px; */
+        text-align: center;
+    }
+}
+
+

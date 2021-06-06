@@ -9,6 +9,7 @@ import Recommendations from './components/Recommendations';
 import Login from './pages/Login';
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
+import './css/app.css'
 
 function App() {
   const [statusValue, setStatusValue] = useState()
@@ -26,7 +27,9 @@ function App() {
   return(
     <Router>
       <div className="App">
+        <div className="nav">
         <Navbar status = {statusValue}/>
+        </div>
         <div className="content">
           <Switch>
             <Route exact path="/">
