@@ -8,14 +8,23 @@ import UserInputs from '../components/UserInputs';
 import { useHistory } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import ApplyVariables from '../scripts/ApplyVariables';
-import jwt_decode from 'jwt-decode'
 
 const Home = (props) => {
     let loadedComponent;
-    let button;
+    let button, token;
     let history = useHistory()
-    let token2 = Cookies.get('token')
-    let decoded = jwt_decode(token2)
+    function parseJwt (token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+    
+        return JSON.parse(jsonPayload);
+    };
+    if(Cookies.get('isAuth')){
+        token = parseJwt(Cookies.get('token'))
+    }
     const [load, setLoad] = useState(0)
     const [weatherData, setWeatherData] = useState()
     const [userMood, setUserMood] = useState('null');
@@ -31,7 +40,7 @@ const Home = (props) => {
     })
 
     const addUserMood = async (mood, weadata) => {
-        const resp = await fetch(`http://localhost:4000/mood/${decoded._id}`, {
+        const resp = await fetch(`http://localhost:4000/mood/${token._id}`, {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -94,21 +103,24 @@ const Home = (props) => {
 
     return (
         <div className="home">
-            <div>
-                {props.isUser ? 
-                <div className="cont"> 
-                    <div className="weatherDiv">
-                        <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
-                    </div>
-                    <div className="contentDiv">
-                        {loadedComponent}
-                    </div>
-                </div> : 
+            {props.isUser ? 
+            <div className="content">
+                <div className="weatherDiv">
+                    {/* <h2>HELLO THIS IS WEATHER DIV</h2> */}
+                    <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
+                </div>
+                <div className="contentDiv">
+                    {/* <h2>HELLO THIS IS COMPONENT DIV</h2> */}
+                    {/* <HowAreYou passMood = {mood => setUserMood(mood)}/> */}
+                    {loadedComponent}
+                </div>
+            </div> : 
+            <div className="notLoggedIn">
                 <div className="cnt">
-                    <h1>You must be logged in to see this page.</h1>
-                    <button onClick={() => history.push('/')}>I want to login!</button>
-                </div>}
-            </div>
+                <h1>You must be logged in to see this page.</h1>
+                <button onClick={() => history.push('/')}>I want to login!</button>
+                </div>    
+            </div>}
         </div>
     );
 }

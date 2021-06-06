@@ -1,44 +1,30 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .hru{
-    text-align: center;
-    margin-left: -300px;
-}
-
-.hru-container{
+    width: 100%;
     display: flex;
-    margin-left: -100px;
-}
-
-.faces{
-    margin-top: 50px;
-    flex-grow: 1;
-}
-
-#saveform{
-    margin-left: 150px;
-    width: 230px;
+    align-items: center;
+    justify-content: center;
     height: 230px;
 }
 
-.hru button{
-    border: 0;
-    background:none;
-    display: block;
-    margin: 20px auto; 
-    border: 1px solid #000000; 
-    padding: 25px 25px;
-    outline: none; 
-    color: #000000; 
-    border-radius: 24px; 
-    transition: 0.25s; 
-    cursor: pointer;
+.hru-container{
+    margin: 0 auto;
 }
 
-.hru button:hover{
-    background: #8bce8e;
+.faces{
+    display: flex;
+    margin-top: 5%;
+}
+
+#saveform{
+    margin-left: 100px;
+}
+
+.faces #saveform:first-child{
+    margin-left: 0;
+}
+
+@media screen and (min-width: 300px) and (max-width: 360px) and (min-height: 550px) and (max-height: 640px){
+    .hru-container{
+        transform: scale(0.33);
+    }
 }

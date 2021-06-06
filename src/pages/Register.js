@@ -1,5 +1,4 @@
 import { useState} from 'react';
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router-dom'
 import '../css/register.css'
 
@@ -10,7 +9,7 @@ const Register = () => {
     const [usernameValue, setUsernameValue] = useState('');
     const [ageValue, setAgeValue] = useState('');
     const addUser = async () => {
-        const resp = await fetch("http://localhost:4000/users", {
+        fetch("http://localhost:4000/users", {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -21,26 +20,35 @@ const Register = () => {
                 username: usernameValue,
                 age: ageValue
             })
-        }) 
-
-        const data = await resp.json()
-        alert("Account created!", data.username)
-        return data
+        }).then(response => response.json()
+            .catch(err => {
+                console.log(err)
+                return {};
+            })).then((json) => {
+                console.log(json);
+                alert(json.status)
+            }).catch(err => {
+                console.log('fetch failed', err)})
     }
 
     return (
         <div className="mainCon">
         <div className="registerContainer">
+                <div className="subCon">
+                <h2>Fill this form to create an account.</h2>
                 <input type="text" autoComplete="off"  placeholder="Email" value={emailValue || ""} onChange={e => setEmailValue(e.target.value)}/>
                 <input type="password" name="password" autoComplete="off" placeholder="Password" value={passwordValue || ""} onChange={e => setPasswordValue(e.target.value)}/>
                 <input type="text" autoComplete="off" placeholder="Username" value={usernameValue || ""} onChange={e => setUsernameValue(e.target.value)}/>
                 <input type="text" autoComplete="off" placeholder="Age" value={ageValue || ""} onChange={e => setAgeValue(e.target.value)}/>
-            <button type ="registerme" onClick={addUser}>Register me!</button>
+                <button type ="registerme" onClick={addUser}>Register me!</button>
+                </div>
         </div>
 
         <div className="gotTheAccount">
+            <div className="accsubCon">
             <h2>Already have an account?</h2>
             <button type="register" onClick={() => {history.push('/')}}>Login to continue!</button>
+            </div>
         </div>
         </div>
     );

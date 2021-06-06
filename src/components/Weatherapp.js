@@ -1,5 +1,4 @@
 import Conditions from './Conditions'
-import '../css/searchWeather.css'
 import useGeoLocation from '../scripts/useGeoLocation'
 import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
@@ -33,7 +32,7 @@ const Weatherapp = (props) => {
     }, [location, Cookies.get('latitude')])
 
     return (
-       <div>
+       <div className = "weatherappDiv">
            {loading ? <div>...loading</div> : <Conditions responseObj = {JSON.parse(data)}/>}
        </div>
     )
