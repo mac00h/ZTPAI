@@ -74,13 +74,17 @@ const UserPreferences = (props) => {
 
     return (
         <div className="preferences">
-            <h3>Select three genres you enjoy listening to.</h3>
+            <div className="info">
+                <h2>Select three genres you enjoy listening to.</h2>
+            </div>
             <div className="genres">
                 {genres.map((e, i) => (
                     <button key={i} id={e} onClick={() => handleClick(e)}>{e}</button>
                 ))}
             </div>
-            <h3>{test}</h3> 
+            <div className="howMany">
+                <h3>{test}</h3> 
+            </div>
         </div>
     );
 }

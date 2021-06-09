@@ -5,7 +5,7 @@ const Songs = (props) => {
         <div className="songsDiv">
             {props.responseObj.tracks.map((e) => {
                 return props.responseObj.tracks ?
-                <a href = {e.external_urls.spotify}>
+                <a href = {e.external_urls.spotify} target="_blank">
                 <div className="trackContainer" key={e.id}>
                     <div className="albumCover" key={e.id}>
                         <img src = {e.album.images[1].url}/>

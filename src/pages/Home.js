@@ -106,12 +106,9 @@ const Home = (props) => {
             {props.isUser ? 
             <div className="content">
                 <div className="weatherDiv">
-                    {/* <h2>HELLO THIS IS WEATHER DIV</h2> */}
                     <Weatherapp passWeatherData = {weatherData => setWeatherData(JSON.parse(weatherData))}/>
                 </div>
                 <div className="contentDiv">
-                    {/* <h2>HELLO THIS IS COMPONENT DIV</h2> */}
-                    {/* <HowAreYou passMood = {mood => setUserMood(mood)}/> */}
                     {loadedComponent}
                 </div>
             </div> : 

@@ -6,6 +6,7 @@ import '../css/songs.css'
 
 const Recommendations = (props) => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
+    const [state, setState] = useState(false)
     const [token, setToken] = useState('null')
     const [userSongs, setUserSongs] = useState('null')
     const [artistID, setArtistID] = useState()
@@ -40,7 +41,7 @@ const Recommendations = (props) => {
         }else{
             console.log('artistid=', artistID)
         }
-    }, [artistID])
+    }, [artistID,state])
 
     const getArtist = async (tk, artist) => {
         axios.get(`http://localhost:4000/spotify/getArtistID/?artist=${artist}&token=${tk}`, {
@@ -102,9 +103,7 @@ const Recommendations = (props) => {
     return (
         <div className="recommended">
             {loaded ? <Songs responseObj = {userSongs}/> : <h2>Loading recommendations..</h2>}
-            <div className="reco">
-            {/* <button className="fetchSongs" onClick={() => getRecommendations(props.genres, artistID, props.seeds, props.userinp.userPopularity)}>Refresh songs</button> */}
-            </div>
+            <button onClick={() => setState(!state)}>Reload!</button>
         </div>
     );
 }
