@@ -3,9 +3,9 @@ import '../css/songs.css'
 const Songs = (props) => {
     return (
         <div className="songsDiv">
-            {props.responseObj.tracks.map((e) => {
+            {props.responseObj.tracks.map((e, i) => {
                 return props.responseObj.tracks ?
-                <a href = {e.external_urls.spotify} target="_blank">
+                <a href = {e.external_urls.spotify} target="_blank" key={i}>
                 <div className="trackContainer" key={e.id}>
                     <div className="albumCover" key={e.id}>
                         <img src = {e.album.images[1].url}/>
@@ -15,11 +15,6 @@ const Songs = (props) => {
                             <h3>{e.artists[0].name}</h3>
                             <h4>{e.name}</h4>
                         </div>
-                        {/* <div className="trackName">
-                            <h4>
-                            {e.name}
-                            </h4>
-                        </div> */}
                     </div>
                 </div>
                 </a> 

@@ -1,5 +1,5 @@
 import '../css/UserInputs.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {RangeStepInput} from 'react-range-step-input';
 const UserInputs = (props) => {
 

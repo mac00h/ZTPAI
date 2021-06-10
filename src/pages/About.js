@@ -13,11 +13,10 @@ const About = () => {
                 <br></br>
                 <div>Technologies used:</div>
                 <div className="technologiesUsed">
-                    <img className="react" src={react}/>
-                    <img className="nodejs" src={nodejs}/>
-                    <img className="mongo" src={mongo}/>
+                    <img className="react" alt="React" src={react}/>
+                    <img className="nodejs" alt="Nodejs" src={nodejs}/>
+                    <img className="mongo" alt="MongoDB" src={mongo}/>
                 </div>
-                <h2></h2>
             </div>
         </div>
     );

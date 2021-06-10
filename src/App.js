@@ -14,6 +14,7 @@ import './css/app.css'
 function App() {
   const [statusValue, setStatusValue] = useState()
   const [isUserAuthenticated, setIsUserAuthenticated] = useState()
+  let CookieValue = Cookies.get('isAuth')
   useEffect(() => {
     if(Cookies.get('isAuth')){
       setIsUserAuthenticated(true)
@@ -22,7 +23,7 @@ function App() {
       setIsUserAuthenticated(false)
       setStatusValue('Login')
     } 
-  }, [Cookies.get('isAuth')])
+  }, [CookieValue])
 
   return(
     <Router>

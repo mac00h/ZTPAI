@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import '../css/login.css'
 import { useHistory } from 'react-router-dom'
@@ -8,9 +8,8 @@ const Login = () => {
 
     const [usernameValue2, setUsernameValue2] = useState('');
     const [passwordValue2, setPasswordValue2] = useState('');
-    const [state, setState] = useState()
     let history = useHistory();
-    let sthWrong;
+    const [sthWrong, setSthWrong] = useState();
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const UserAuthenticated = async () => {
@@ -47,7 +46,7 @@ const Login = () => {
                 return {};
             })).then((json) => {
                 console.log(json);
-                alert(json.status)
+                setSthWrong(json.status)
                 Cookies.set('token', json.token)
             }).catch((err) => {
                 console.log('fetch failed', err)})
@@ -61,7 +60,7 @@ const Login = () => {
                     <input type="text" name="email" placeholder="Username" value={usernameValue2 || ""} onChange={e => setUsernameValue2(e.target.value)}></input>
                     <input type="password" name="password" placeholder="Password" value={passwordValue2 || ""} onChange={e => setPasswordValue2(e.target.value)}></input>
                     <button type="submit" name="submit" onClick={LoginUser}>Login</button>
-                    {sthWrong}
+                    <h3>{sthWrong}</h3>
                 </div>
             </div>
             <div className="noAccount">
@@ -70,7 +69,6 @@ const Login = () => {
                 <button type="register" onClick={() => {history.push('/Register')}}>I want to register!</button>
                 </div>
             </div>
-            {state}
         </div>
     );
 }

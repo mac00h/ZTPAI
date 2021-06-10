@@ -50,6 +50,10 @@ input[type="range"] {
     background: #2ecc71;
 }
 
+.userInputs button:focus{
+    outline: none;
+}
+
 .artistDiv h2{
     margin-bottom: 10px;
 }

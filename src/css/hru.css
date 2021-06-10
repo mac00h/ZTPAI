@@ -20,6 +20,10 @@
     margin-left: 100px;
 }
 
+#saveform:focus{
+    outline: none;
+}
+
 .faces #saveform:first-child{
     margin-left: 0;
 }

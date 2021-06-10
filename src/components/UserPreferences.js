@@ -22,21 +22,47 @@ const UserPreferences = (props) => {
     const handleClick = (ev) => {
         console.log(ev)
         const bt = document.getElementById(ev)
-        bt.setAttribute("disabled", "true")
+        bt.setAttribute('disabled', true)
+        // if(bt.hasAttribute('name')){
+        //     bt.removeAttribute('name')
+        //     setState(state-1)
+        //     switch(state){
+        //         case(0):
+        //             setFirstG('null')
+        //             setHowManyToGo(howManyToGo+1)
+        //         break;
+
+        //         case(1):
+        //             setSecondG('null')
+        //             setHowManyToGo(howManyToGo+1)
+        //         break;
+
+        //         case(2):
+        //             setThirdG('null')
+        //             setHowManyToGo(howManyToGo+1)
+        //         break;
+        //     }
+        // }else{
+        //     bt.setAttribute('name', ev)
+        // }
+        
 
         switch(state){
             case(0):
                 setFirstG(ev)
+                console.log('firstset')
                 setHowManyToGo(howManyToGo-1)
             break;
 
             case(1):
                 setSecondG(ev)
+                console.log('secondset')
                 setHowManyToGo(howManyToGo-1)
             break;
 
             case(2):
                 setThirdG(ev)
+                console.log('thirdset')
                 setHowManyToGo(howManyToGo-1)
             break;
                 

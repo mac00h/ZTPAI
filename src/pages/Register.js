@@ -6,10 +6,13 @@ const Register = () => {
     let history = useHistory()
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
+    const [passwordSecValue, setPasswordSecValue] = useState('');
     const [usernameValue, setUsernameValue] = useState('');
     const [ageValue, setAgeValue] = useState('');
+    const [sthWrong, setSthWrong] = useState('');
     const addUser = async () => {
-        fetch("http://localhost:4000/users", {
+        if(passwordValue === passwordSecValue){
+            fetch("http://localhost:4000/users", {
             method: "POST",
             headers: {
                 'Content-Type' : 'application/json'
@@ -26,9 +29,12 @@ const Register = () => {
                 return {};
             })).then((json) => {
                 console.log(json);
-                alert(json.status)
+                setSthWrong(json.status)
             }).catch(err => {
                 console.log('fetch failed', err)})
+        }else{
+            setSthWrong('Passwords doesnot match.')
+        }
     }
 
     return (
@@ -38,10 +44,13 @@ const Register = () => {
                 <h2>Fill this form to create an account.</h2>
                 <input type="text" autoComplete="off"  placeholder="Email" value={emailValue || ""} onChange={e => setEmailValue(e.target.value)}/>
                 <input type="password" name="password" autoComplete="off" placeholder="Password" value={passwordValue || ""} onChange={e => setPasswordValue(e.target.value)}/>
+                <input type="password" name="password" autoComplete="off" placeholder="Confirm Password" value={passwordSecValue || ""} onChange={e => setPasswordSecValue(e.target.value)}/>
                 <input type="text" autoComplete="off" placeholder="Username" value={usernameValue || ""} onChange={e => setUsernameValue(e.target.value)}/>
                 <input type="text" autoComplete="off" placeholder="Age" value={ageValue || ""} onChange={e => setAgeValue(e.target.value)}/>
                 <button type ="registerme" onClick={addUser}>Register me!</button>
+                <h3>{sthWrong}</h3>
                 </div>
+                
         </div>
 
         <div className="gotTheAccount">

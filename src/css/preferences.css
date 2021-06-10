@@ -22,6 +22,9 @@
     background: white;
     
 }
+.genres button:focus{
+    outline: none;
+}
 
 .genres button:disabled, button[disabled]{
     background: #2ecc71;
