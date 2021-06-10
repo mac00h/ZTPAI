@@ -1,5 +1,3 @@
 School project made with React & Node.js
-
-
-DBSchema:
+DBSchema:<br>
 <img src="/screenshots/db.PNG"/>
