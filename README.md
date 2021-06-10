@@ -6,7 +6,7 @@ Login page: <br>
 <img src="/screenshots/loginPage.PNG"/>
 
 Register page: <br>
-<img src="/screenshots/RegisterPage.PNG"/>
+<img src="/screenshots/registerPage.PNG"/>
 
 About page: <br>
 <img src="/screenshots/aboutPage.PNG"/>
